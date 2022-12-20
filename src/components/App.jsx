@@ -1,5 +1,7 @@
+import { Searchbar } from "./Searchbar/Searchbar";
+
 export const App = () => {
   return <div>
-   Fuck u
+   <Searchbar/>
     </div>;
 };
