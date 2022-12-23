@@ -4,7 +4,6 @@ import Modal from "components/Modal/Modal";
 export class ImageGalleryItem extends Component {
     state = {
         largeImageURL: null,
-        isModal: false
     };
 
     onImageClick = e => {
