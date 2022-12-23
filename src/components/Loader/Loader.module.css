@@ -1,0 +1,13 @@
+.icon{
+    animation: icon 2s infinite linear;
+    font-size: 64px;
+    color: yellow;
+}
+@keyframes icon{
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(359deg);
+    }
+}
