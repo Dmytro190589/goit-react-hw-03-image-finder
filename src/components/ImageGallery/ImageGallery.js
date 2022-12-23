@@ -9,7 +9,6 @@ export class ImageGallery extends Component {
         pictures: [],
         error: null,
         isLoading: false,
-        isLoadMoreBtnShown: false
     };
 
     componentDidUpdate(prevProps, prevState) {
@@ -26,31 +25,31 @@ export class ImageGallery extends Component {
                     if (!data.hits?.length) {
                         alert('Bad request,try again');
                     }
-                        this.setState(prevState => ({
-                            pictures: [...prevState.pictures, ...data.hits],
-                            isLoadMoreBtnShown: true,
-                        }))
+                    this.setState(prevState => ({
+                        pictures: [...prevState.pictures, ...data.hits],
+                    }))
                 })
                 .catch(error => this.setState({ error }))
                 .finally(() => this.setState({ isLoading: false }))
         }
     }
-
+  
     render() {
         return (
             <>
                 <ul className={css.gallery} >
                     {this.state.pictures &&
-                        this.state.pictures.map(e => (
+                        this.state.pictures.map(picture => (
                             <ImageGalleryItem
-                                key={e.id}
-                                webformatURL={e.webformatURL}
+                                key={picture.id}
+                                picture = {picture}
+                                webformatURL={picture.webformatURL}
                             />
                         ))}
 
                 </ul>
                 {this.state.isLoading && <Loader />}
-                {this.state.pictures.length?<Button onClick={this.props.loadMoreBtn} />:''}
+                {this.state.pictures.length ? <Button onClick={this.props.loadMoreBtn} /> : ''}
 
 
             </>

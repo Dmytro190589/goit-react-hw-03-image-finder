@@ -17,11 +17,15 @@ export default class App extends Component {
       this.setState({ request: el, page: 1 });
     }
   };
+  onModalClose = e => {
+    if (e.currentTarget === e.target || e.code === 'Escape')
+      this.setState({ isModalOpen: false });
+  };
   render() {
     return (
       <div className={css.app}>
         <Searchbar onSubmit={this.handleFormSubmit} />
-        <ImageGallery request={this.state.request} page={this.state.page} loadMoreBtn = {this.loadMoreBtn}/>
+        <ImageGallery request={this.state.request} page={this.state.page} loadMoreBtn = {this.loadMoreBtn} pictures = {this.state.pictures}/>
       </div>
     );
   }
