@@ -15,14 +15,14 @@ export class ImageGalleryItem extends Component {
     };
     render() {
         const { largeImageURL } = this.state;
-        const { picture } = this.props;
+        const { picture,id,webformatURL} = this.props;
         return <li
             className={css.ImageGalleryItem}
         >
             <img
                 className={css.GalleryItem}
-                src={this.props.webformatURL}
-                alt={this.props.id}
+                src={webformatURL}
+                alt={id}
                 data-action={picture.largeImageURL}
                 onClick={this.onImageClick}
             />
