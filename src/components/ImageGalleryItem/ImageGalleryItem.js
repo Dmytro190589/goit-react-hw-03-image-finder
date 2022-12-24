@@ -1,13 +1,14 @@
 import { Component } from "react";
 import css from './ImageGalleryItem.module.css'
 import Modal from "components/Modal/Modal";
+import PropTypes from 'prop-types';
 export class ImageGalleryItem extends Component {
     state = {
         largeImageURL: null,
     };
 
-    onImageClick = e => {
-        this.setState({ largeImageURL: e.currentTarget.dataset.action });
+    onClickPicture = e => {
+        this.setState({ largeImageURL: e.currentTarget.dataset.open });
     };
 
     closeModal = () => {
@@ -15,7 +16,7 @@ export class ImageGalleryItem extends Component {
     };
     render() {
         const { largeImageURL } = this.state;
-        const { picture,id,webformatURL} = this.props;
+        const { picture, id, webformatURL } = this.props;
         return <li
             className={css.ImageGalleryItem}
         >
@@ -23,8 +24,8 @@ export class ImageGalleryItem extends Component {
                 className={css.GalleryItem}
                 src={webformatURL}
                 alt={id}
-                data-action={picture.largeImageURL}
-                onClick={this.onImageClick}
+                data-open={picture.largeImageURL}
+                onClick={this.onClickPicture}
             />
             {largeImageURL && (
                 <Modal largeImage={largeImageURL} closeModal={this.closeModal} />
@@ -32,3 +33,11 @@ export class ImageGalleryItem extends Component {
         </li>
     }
 }
+
+ImageGalleryItem.propTypes = {
+    picture: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        webformatURL: PropTypes.string.isRequired,
+        largeImageURL: PropTypes.string.isRequired,
+    }).isRequired,
+};

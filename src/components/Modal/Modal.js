@@ -29,7 +29,7 @@ class Modal extends Component {
         return (
             <div className={css.overlay} onClick={this.handleClick}>
                 <div className={css.modal}>
-                    <img src={largeImage} alt="big" />
+                    <img src={largeImage} alt="big pictures" />
                 </div>
             </div>
         );

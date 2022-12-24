@@ -4,6 +4,7 @@ import Loader from "components/Loader/Loader";
 import { Component } from "react";
 import css from './ImageGallery.module.css';
 import { Button } from "components/Button/Button";
+import PropTypes from 'prop-types'
 export class ImageGallery extends Component {
     state = {
         pictures: [],
@@ -33,28 +34,36 @@ export class ImageGallery extends Component {
                 .finally(() => this.setState({ isLoading: false }))
         }
     }
-  
+
     render() {
+        const { isLoading, pictures } = this.state;
+        const { loadMoreBtn } = this.props;
         return (
             <>
+
                 <ul className={css.gallery} >
                     {this.state.pictures &&
                         this.state.pictures.map(picture => (
                             <ImageGalleryItem
                                 key={picture.id}
-                                picture = {picture}
+                                picture={picture}
                                 webformatURL={picture.webformatURL}
                             />
                         ))}
 
                 </ul>
-                {this.state.isLoading && <Loader />}
-                {this.state.pictures.length ? <Button onClick={this.props.loadMoreBtn} /> : ''}
+                {isLoading && <Loader />}
+                {pictures.length ? <Button onClick={loadMoreBtn} /> : ''}
 
 
             </>
         );
     }
+}
+ImageGallery.propTypes = {
+    request: PropTypes.string.isRequired,
+    loadMoreBtn: PropTypes.func,
+    page: PropTypes.number.isRequired,
 }
 
 
