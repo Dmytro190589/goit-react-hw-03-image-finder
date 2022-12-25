@@ -12,13 +12,13 @@ export default class App extends Component {
   loadMoreBtn = () => {
     this.setState(prevState => ({ page: prevState.page + 1 }));
   };
-  handleFormSubmit = el => {
-    if (el !== this.state.request) {
-      this.setState({ request: el, page: 1 });
+  handleFormSubmit = request => {
+    if (request !== this.state.request) {
+      this.setState({request: request, page: 1});
     }
   };
   render() {
-    const {request,page,pictures} = this.state
+    const { request, page, pictures } = this.state;
     return (
       <div className={css.app}>
         <Searchbar onSubmit={this.handleFormSubmit} />

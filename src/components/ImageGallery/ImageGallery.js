@@ -13,11 +13,13 @@ export class ImageGallery extends Component {
     };
 
     componentDidUpdate(prevProps, prevState) {
+        const { request, page } = this.props;
+        const prevRequest = prevProps.request;
+        const prevPage = prevProps.page;
         let fetchApi = `https://pixabay.com/api/?q=${this.props.request}&page=${this.props.page}&key=32188419-e3a5ebcfb978061bafc2d31ff&image_type=photo&orientation=horizontal&per_page=12`;
-
         if (
-            this.props.request !== prevProps.request ||
-            this.props.page !== prevProps.page
+            prevPage !== page || prevRequest !== request
+       
         ) {
             this.setState({ isLoading: true })
             fetch(fetchApi)
@@ -26,13 +28,19 @@ export class ImageGallery extends Component {
                     if (!data.hits?.length) {
                         alert('Bad request,try again');
                     }
-                    this.setState(prevState => ({
-                        pictures: [...prevState.pictures, ...data.hits],
-                    }))
+                    if (request === prevRequest)
+                       { return this.setState(prevState => ({
+                            pictures: [...prevState.pictures, ...data.hits]
+                        }))}
+                        else {
+                            return this.setState({pictures: [...data.hits]})
+                        }
                 })
                 .catch(error => this.setState({ error }))
                 .finally(() => this.setState({ isLoading: false }))
         }
+        
+
     }
 
     render() {
@@ -68,3 +76,6 @@ ImageGallery.propTypes = {
 
 
 
+// this.setState(prevState => ({
+//     pictures: [...prevState.pictures, ...data.hits]
+// }))

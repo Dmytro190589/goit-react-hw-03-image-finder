@@ -14,25 +14,25 @@ export class Searchbar extends Component {
 
     }
     handleSubmit = e => {
+
         e.preventDefault();
         if (this.state.request.trim() === '') {
-         return  alert('Please, enter your request');
-            
+            return alert('Please, enter your request');
         }
         this.props.onSubmit(this.state.request)
         this.setState({ request: '' })
     }
     render() {
         return (
-            <header 
-            className={css.searchbar}
+            <header
+                className={css.searchbar}
             >
-                <form onSubmit={this.handleSubmit} 
-                className={css.form}
+                <form onSubmit={this.handleSubmit}
+                    className={css.form}
                 >
                     <button type="submit"
                         className={css.button}
-                        >
+                    >
                         <ImSearch />
                     </button>
 
